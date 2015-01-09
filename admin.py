@@ -8,6 +8,7 @@ from model.response import Response
 
 
 class admin:
+
     def GET(self):
         return "<p style='font-family: \"Lucida Console\", Monaco, monospace'>OTTDPoxy: Get is not supported.</p>"
 
@@ -60,16 +61,16 @@ class admin:
 
     def __game_config(self, config, request, response):
 
-        if os.path.isdir(config.game_config_location):
-            response.error = 'path ' + config.game_config_location + "doesn't exist"
+        if not os.path.isdir(config.game_config_location):
+            response.error = 'path ' + config.game_config_location + " doesn't exist"
             return response
 
         if 'action' in request.payload:
             action = request.payload['action']
-            if action is 'list':
+            if action == 'list':
                 response.payload['config_files'] = glob.glob(os.path.join(config.game_config_location, config.game_config_filter))
 
-            elif action is 'save':
+            elif action == 'save':
                 if not 'config_file' in request.payload:
                     response.error = 'no config file specified in request'
                     return response
@@ -100,7 +101,7 @@ class admin:
                 else:
                     with f:
                         try:
-                            response.payload['config_data'] = base64.b64encode(f.read(str(request.payload['config_data'])))
+                            response.payload['config_data'] = base64.b64encode(f.read())
                         except Exception as ex:
                             response.error = 'Error reading file: ' + ex.message
 
@@ -113,7 +114,7 @@ class admin:
                 try:
                     os.remove(request.payload['config_file'])
                 except IOError as ex:
-                    response.error =  'Error removing file: ' + ex.message
+                    response.error = 'Error removing file: ' + ex.message
 
                 return response
 

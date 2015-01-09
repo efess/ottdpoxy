@@ -4,7 +4,8 @@ from model.request import Request
 from model.response import Response
 
 
-class Stats:
+class stats:
+
     def GET(self):
         return "<p style='font-family: \"Lucida Console\", Monaco, monospace'>OTTDPoxy: Get is not supported.</p>"
 

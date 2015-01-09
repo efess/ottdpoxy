@@ -1,4 +1,6 @@
 import web
+from admin import admin
+from stats import stats
 
 from config import Config
 from openttd.stats_query import StatsQuery
@@ -6,7 +8,7 @@ from context import Context
 
 
 urls = (
-    '/stats', 'Stats',
+    '/stats', 'stats',
     '/admin', 'admin'
 )
 

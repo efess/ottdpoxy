@@ -65,6 +65,7 @@ class Config:
                                 "enabled": True,
                                 "password": "",
                                 "web_host_access": "*",
+                                "allow_public": False,
                                 "game_config_location": '/home/openttd/.openttd',
                                 "game_config_filter": '*.cfg',
                                 "ofs_script_location": '/home/openttd/ofs'
